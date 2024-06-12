@@ -7,17 +7,10 @@ async function fetchCSV() {
 function csvToJSON(csv) {
     const lines = csv.trim().split('\n');
     const result = [];
-    const headers = lines[0].split(',').map(header => header.trim());
 
-    for (let i = 1; i < lines.length; i++) {
+    for (let i = 0; i < lines.length; i++) {
         const currentline = lines[i].split(',').map(item => item.trim());
-        if (currentline.length === headers.length) {
-            const obj = {};
-            for (let j = 0; j < headers.length; j++) {
-                obj[headers[j]] = currentline[j];
-            }
-            result.push(obj);
-        }
+        result.push({ name: currentline[0] }); // Assuming each line has only one name
     }
 
     return result;
